@@ -12,7 +12,7 @@ import java.util.Properties;
  * @author coolsen
  * @version 1.0.0
  * @ClassName KaptchaConfig.java
- * @Description TODO
+ * @Description 验证码插件Kaptcha配置
  * @createTime 4/29/2020 5:26 PM
  */
 @Configuration

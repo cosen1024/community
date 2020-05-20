@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @author shuaisen ma
  * @version 1.0.0
  * @ClassName LoggerTests.java
- * @Description TODO
+ * @Description Log test
  * @createTime 2020年04月28日 13:14:00
  */
 @RunWith(SpringRunner.class)

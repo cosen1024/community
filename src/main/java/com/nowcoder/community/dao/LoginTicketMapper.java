@@ -7,11 +7,12 @@ import org.apache.ibatis.annotations.*;
  * @author coolsen
  * @version 1.0.0
  * @ClassName LoginTicketMapper.java
- * @Description 登录mapper
+ * @Description 登录mapper,不推荐使用，目前使用redis存储ticket
  * @createTime 4/29/2020 6:16 PM
  */
 
 @Mapper
+@Deprecated
 public interface LoginTicketMapper {
 
     @Insert({
