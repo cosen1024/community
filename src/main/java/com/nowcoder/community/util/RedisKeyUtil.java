@@ -28,6 +28,8 @@ public class RedisKeyUtil {
     private static final String PREFIX_UV = "uv";
     private static final String PREFIX_DAU = "dau";
 
+    private static final String PREFIX_POST = "post";
+
 
     //某个实体收到的赞，如帖子，评论
     //like:entity:entityType:entityId -> set(userId) 对应set，存入userId
@@ -88,5 +90,10 @@ public class RedisKeyUtil {
     // 区间DAU
     public static String getDAUKey(String startDate, String endDate) {
         return PREFIX_DAU + SPLIT + startDate + SPLIT + endDate;
+    }
+
+    // 帖子分数
+    public static String getPostScoreKey() {
+        return PREFIX_POST + SPLIT + "score";
     }
 }

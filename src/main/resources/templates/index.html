@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!--	TODO:所有异步请求都要这样加,注意SecurityConfig中的代码.and().csrf().disable()要关闭-->
+	<!--	TODO:所有异步请求都要这样加,注意SecurityConfig中的代码.and().csrf().disable()要关闭-->
 	<!--访问该页面时,在此处生成CSRF令牌.-->
-<!--		<meta name="_csrf" th:content="${_csrf.token}">-->
-<!--		<meta name="_csrf_header" th:content="${_csrf.headerName}">-->
+	<!--	<meta name="_csrf" th:content="${_csrf.token}">-->
+	<!--	<meta name="_csrf_header" th:content="${_csrf.headerName}">-->
 
 	<link rel="icon" href="https://static.nowcoder.com/images/logo_87_87.png"/>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
@@ -70,10 +70,10 @@
 				<!-- 筛选条件 -->
 				<ul class="nav nav-tabs mb-3">
 					<li class="nav-item">
-						<a class="nav-link active" href="#">最新</a>
+						<a th:class="|nav-link ${orderMode==0?'active':''}|" th:href="@{/index(orderMode=0)}">最新</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">最热</a>
+						<a th:class="|nav-link ${orderMode==1?'active':''}|" th:href="@{/index(orderMode=1)}">最热</a>
 					</li>
 				</ul>
 				<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal" th:if="${loginUser!=null}">我要发布</button>
