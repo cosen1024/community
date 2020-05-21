@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
@@ -28,17 +29,17 @@ import java.io.PrintWriter;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements CommunityConstant {
 
-    // 创建和自定义过滤器链
     @Override
     public void configure(WebSecurity web) throws Exception {
-         // 忽略静态资源的访问
-         web.ignoring().antMatchers("/resources/**");
+        // 忽略静态资源的访问
+        web.ignoring().antMatchers("/resources/**");
     }
 
     // 授权
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // 授权
+        // TODO: 所有异步请求要开启csrf
         http.authorizeRequests()
                 .antMatchers(
                         "/user/setting",
@@ -55,6 +56,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         AUTHORITY_USER,
                         AUTHORITY_ADMIN,
                         AUTHORITY_MODERATOR
+                )
+                .antMatchers(
+                        "/discuss/top",
+                        "/discuss/wonderful"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_MODERATOR
+                )
+                .antMatchers(
+                        "/discuss/delete",
+                        "/data/**"
+                )
+                .hasAnyAuthority(
+                        AUTHORITY_ADMIN
                 )
                 .anyRequest().permitAll()
                 .and().csrf().disable();

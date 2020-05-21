@@ -176,142 +176,21 @@ public class MessageController implements CommunityConstant {
         return CommunityUtil.getJSONString(0);
     }
 
-//    // 通知列表,指系统发送的通知
-//    @RequestMapping(path = "/notice/list", method = RequestMethod.GET)
-//    public String getNoticeList(Model model) {
-//        User user = hostHolder.getUser();
-//
-//        // 查询评论类通知
-//        Message message = messageService.findLatestNotice(user.getId(), TOPIC_COMMENT);
-//        Map<String, Object> messageVO = new HashMap<>();
-//        if (message != null) {
-//            messageVO.put("message", message);
-//
-//            //将转义字符还原回去
-//            String content = HtmlUtils.htmlUnescape(message.getContent());
-//            //还原为map
-//            Map<String,Object> data = JSONObject.parseObject(content, HashMap.class);
-//
-//            messageVO.put("user",userService.findUserById((Integer) data.get("userId")));
-//            messageVO.put("entityType", data.get("entityType"));
-//            messageVO.put("entityId", data.get("entityId"));
-//            messageVO.put("postId", data.get("postId"));
-//
-//            int count = messageService.findNoticeCount(user.getId(), TOPIC_COMMENT);
-//            messageVO.put("count",count);
-//
-//            int unread = messageService.findLetterUnreadCount(user.getId(), TOPIC_COMMENT);
-//            messageVO.put("unread",unread);
-//        }
-//        model.addAttribute("commentNotice",messageVO);
-//
-//        // 查询点赞类通知
-//        message = messageService.findLatestNotice(user.getId(), TOPIC_LIKE);
-//        messageVO = new HashMap<>();
-//        if (message != null) {
-//            messageVO.put("message", message);
-//
-//            String content = HtmlUtils.htmlUnescape(message.getContent());
-//            Map<String, Object> data = JSONObject.parseObject(content, HashMap.class);
-//
-//            messageVO.put("user", userService.findUserById((Integer) data.get("userId")));
-//            messageVO.put("entityType", data.get("entityType"));
-//            messageVO.put("entityId", data.get("entityId"));
-//            messageVO.put("postId", data.get("postId"));
-//
-//            int count = messageService.findNoticeCount(user.getId(), TOPIC_LIKE);
-//            messageVO.put("count", count);
-//
-//            int unread = messageService.findNoticeUnreadCount(user.getId(), TOPIC_LIKE);
-//            messageVO.put("unread", unread);
-//        }
-//        model.addAttribute("likeNotice", messageVO);
-//
-//        // 查询关注类通知
-//        message = messageService.findLatestNotice(user.getId(), TOPIC_FOLLOW);
-//        messageVO = new HashMap<>();
-//        if (message != null) {
-//            messageVO.put("message", message);
-//
-//            String content = HtmlUtils.htmlUnescape(message.getContent());
-//            Map<String, Object> data = JSONObject.parseObject(content, HashMap.class);
-//
-//            messageVO.put("user", userService.findUserById((Integer) data.get("userId")));
-//            messageVO.put("entityType", data.get("entityType"));
-//            messageVO.put("entityId", data.get("entityId"));
-//
-//            int count = messageService.findNoticeCount(user.getId(), TOPIC_FOLLOW);
-//            messageVO.put("count", count);
-//
-//            int unread = messageService.findNoticeUnreadCount(user.getId(), TOPIC_FOLLOW);
-//            messageVO.put("unread", unread);
-//        }
-//        model.addAttribute("followNotice", messageVO);
-//
-//        // 查询未读私信总数量,无会话id限制
-//        int letterUnreadCount = messageService.findLetterUnreadCount(user.getId(),null);
-//        model.addAttribute("letterUnreadCount",letterUnreadCount);
-//        // 查询未读通知总数量,无topic限制
-//        int noticeUnreadCount = messageService.findNoticeUnreadCount(user.getId(), null);
-//        model.addAttribute("noticeUnreadCount",noticeUnreadCount);
-//
-//        return "/site/notice";
-//    }
-//
-//    // 通知详情
-//    @RequestMapping(path = "/notice/detail/{topic}",method = RequestMethod.GET)
-//    public String getNoticeDetail(@PathVariable("topic") String topic,Model model,Page page){
-//        User user = hostHolder.getUser();
-//
-//        page.setLimit(5);
-//        page.setPath("/notice/detail/"+topic);
-//        page.setRows(messageService.findNoticeCount(user.getId(),topic));
-//
-//        List<Message> noticeList = messageService.findNotices(user.getId(), topic, page.getOffset(), page.getLimit());
-//        List<Map<String,Object>> noticeVOList=new ArrayList<>();
-//        if(noticeList!=null){
-//            for(Message notice:noticeList){
-//                Map<String,Object> map=new HashMap<>();
-//
-//                // 通知
-//                map.put("notice",notice);
-//                // 内容
-//                String content = HtmlUtils.htmlUnescape(notice.getContent());
-//                HashMap data = JSONObject.parseObject(content, HashMap.class);
-//                map.put("user",userService.findUserById((Integer) data.get("userId")));
-//                map.put("entityType", data.get("entityType"));
-//                map.put("entityId", data.get("entityId"));
-//                map.put("postId", data.get("postId"));
-//
-//                // 通知的作者，即系统
-//                map.put("fromUser",userService.findUserById(notice.getFromId()));
-//
-//                noticeVOList.add(map);
-//            }
-//        }
-//        model.addAttribute("notices",noticeVOList);
-//
-//        // 设置状态为已读
-//        List<Integer> ids = getLetterIds(noticeList);
-//        if(ids!=null){
-//            messageService.readMessage(ids);
-//        }
-//
-//        return "/site/notice-detail";
-//    }
-
-    // TODO:进行统一处理thymeleaf，存在bug
+    // 通知列表,指系统发送的通知
     @RequestMapping(path = "/notice/list", method = RequestMethod.GET)
     public String getNoticeList(Model model) {
         User user = hostHolder.getUser();
 
         // 查询评论类通知
         Message message = messageService.findLatestNotice(user.getId(), TOPIC_COMMENT);
-        Map<String, Object> messageVO = new HashMap<>();
+
         if (message != null) {
+            Map<String, Object> messageVO = new HashMap<>();
             messageVO.put("message", message);
 
+            // 将转义字符还原回去
             String content = HtmlUtils.htmlUnescape(message.getContent());
+            // 还原为map
             Map<String, Object> data = JSONObject.parseObject(content, HashMap.class);
 
             messageVO.put("user", userService.findUserById((Integer) data.get("userId")));
@@ -324,13 +203,15 @@ public class MessageController implements CommunityConstant {
 
             int unread = messageService.findNoticeUnreadCount(user.getId(), TOPIC_COMMENT);
             messageVO.put("unread", unread);
+            model.addAttribute("commentNotice", messageVO);
         }
-        model.addAttribute("commentNotice", messageVO);
+
 
         // 查询点赞类通知
         message = messageService.findLatestNotice(user.getId(), TOPIC_LIKE);
-        messageVO = new HashMap<>();
+
         if (message != null) {
+            Map<String, Object> messageVO = new HashMap<>();
             messageVO.put("message", message);
 
             String content = HtmlUtils.htmlUnescape(message.getContent());
@@ -346,13 +227,14 @@ public class MessageController implements CommunityConstant {
 
             int unread = messageService.findNoticeUnreadCount(user.getId(), TOPIC_LIKE);
             messageVO.put("unread", unread);
+            model.addAttribute("likeNotice", messageVO);
         }
-        model.addAttribute("likeNotice", messageVO);
+
 
         // 查询关注类通知
         message = messageService.findLatestNotice(user.getId(), TOPIC_FOLLOW);
-        messageVO = new HashMap<>();
         if (message != null) {
+            Map<String, Object> messageVO = new HashMap<>();
             messageVO.put("message", message);
 
             String content = HtmlUtils.htmlUnescape(message.getContent());
@@ -368,13 +250,14 @@ public class MessageController implements CommunityConstant {
 
             int unread = messageService.findNoticeUnreadCount(user.getId(), TOPIC_FOLLOW);
             messageVO.put("unread", unread);
+            model.addAttribute("followNotice", messageVO);
         }
 
-        model.addAttribute("followNotice", messageVO);
 
-        // 查询未读消息数量
+        // 查询未读私信总数量,无会话id限制
         int letterUnreadCount = messageService.findLetterUnreadCount(user.getId(), null);
         model.addAttribute("letterUnreadCount", letterUnreadCount);
+        // 查询未读通知总数量,无topic限制
         int noticeUnreadCount = messageService.findNoticeUnreadCount(user.getId(), null);
         model.addAttribute("noticeUnreadCount", noticeUnreadCount);
 
