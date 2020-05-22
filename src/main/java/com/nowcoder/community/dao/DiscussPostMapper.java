@@ -25,5 +25,5 @@ public interface DiscussPostMapper {
 
     int updateStatus(int id, int status);
 
-    void updateScore(int id, double score);
+    int updateScore(int id, double score);
 }
