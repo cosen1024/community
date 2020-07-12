@@ -151,7 +151,7 @@ public class EventConsumer implements CommunityConstant {
             logger.error("生成长图失败: " + e.getMessage());
         }
 
-        // 启动定时器，监视该图片吗，一旦生成了，上传云服务器
+        // 启动定时器，监视该图片，一旦生成了，上传云服务器
         // 如果超时(30s),或者上传失败(>=3次) 取消任务.返回值future可以取消task
         UploadTask task = new UploadTask(fileName, suffix);
         Future future = taskScheduler.scheduleAtFixedRate(task, 500);
