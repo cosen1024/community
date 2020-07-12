@@ -70,11 +70,12 @@
 				<!-- 筛选条件 -->
 				<ul class="nav nav-tabs mb-3">
 					<li class="nav-item">
-						<a th:class="|nav-link ${orderMode==0?'active':''}|" th:href="@{/index(orderMode=0)}">最新</a>
-					</li>
-					<li class="nav-item">
 						<a th:class="|nav-link ${orderMode==1?'active':''}|" th:href="@{/index(orderMode=1)}">最热</a>
 					</li>
+					<li class="nav-item">
+						<a th:class="|nav-link ${orderMode==0?'active':''}|" th:href="@{/index(orderMode=0)}">最新</a>
+					</li>
+
 				</ul>
 				<button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal" data-target="#publishModal" th:if="${loginUser!=null}">我要发布</button>
 			</div>

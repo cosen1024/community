@@ -14,7 +14,7 @@ import javax.mail.internet.MimeMessage;
 /**
  * @author coolsen
  * @version 1.0.0
- * @ClassName MailClient.java
+ * MailClient.java
  * @Description 邮箱客户端
  * @createTime 4/28/2020 8:36 PM
  */

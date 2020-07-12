@@ -61,13 +61,13 @@ public class DiscussPostService {
                         if (params == null || params.length != 2) {
                             throw new IllegalArgumentException("参数错误!");
                         }
-                        int offser = Integer.valueOf(params[0]);
+                        int offset = Integer.valueOf(params[0]);
                         int limit = Integer.valueOf(params[1]);
 
                         // TODO:二级缓存：redis->mysql
 
                         logger.debug("load post list from DB.");
-                        return discussPostMapper.selectDiscussPosts(0, offser, limit, 1);
+                        return discussPostMapper.selectDiscussPosts(0, offset, limit, 1);
                     }
                 });
 

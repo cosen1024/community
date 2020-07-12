@@ -1,11 +1,9 @@
 package com.nowcoder.community.controller;
 
+import ch.qos.logback.core.joran.spi.NoAutoStart;
 import com.nowcoder.community.entity.*;
 import com.nowcoder.community.event.EventProducer;
-import com.nowcoder.community.service.CommentService;
-import com.nowcoder.community.service.DiscussPostService;
-import com.nowcoder.community.service.LikeService;
-import com.nowcoder.community.service.UserService;
+import com.nowcoder.community.service.*;
 import com.nowcoder.community.util.CommunityConstant;
 import com.nowcoder.community.util.CommunityUtil;
 import com.nowcoder.community.util.HostHolder;
@@ -52,6 +50,9 @@ public class DiscussPostController implements CommunityConstant {
     
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private ElasticsearchService elasticsearchService;
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
     @ResponseBody
@@ -221,6 +222,7 @@ public class DiscussPostController implements CommunityConstant {
                 .setEntityId(id);
         eventProducer.fireEvent(event);
 
+        elasticsearchService.deleteDiscussPost(id);
         return CommunityUtil.getJSONString(0);
     }
 }
