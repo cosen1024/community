@@ -10,9 +10,9 @@
 * 使用Spring Security 做权限控制，替代拦截器的拦截控制，并使用自己的认证方案替代Security 认证流程，使权限认证和控制更加方便灵活。
 * 使用Redis的set实现点赞，zset实现关注，并使用Redis存储登录ticket和验证码，解决分布式session问题。 
 * 使用Redis高级数据类型HyperLogLog统计UV(Unique Visitor),使用Bitmap统计DAU(Daily Active User)。
-* 使用Kafka处理发送评论、点赞和关注等系统通知，并使用事件进行封装，构建了强大的异步消息 系统。 
+* 使用Kafka处理发送评论、点赞和关注等系统通知，并使用事件进行封装，构建了强大的异步消息系统。 
 * 使用Elasticsearch做全局搜索，并通过事件封装，增加关键词高亮显示等功能。 
-* 对热帖排行模块，使用分布式缓存Redis和本地缓存Caffeine作为多级缓存，避免了缓存雪崩，将 QPS提升了20倍(10-200)，大大提升了网站访问速度。并使用Quartz定时更新热帖排行。 
+* 对热帖排行模块，使用分布式缓存Redis和本地缓存Caffeine作为多级缓存，避免了缓存雪崩，将QPS提升了20倍(10-200)，大大提升了网站访问速度。并使用Quartz定时更新热帖排行。 
 
 
 ## 开发环境
@@ -30,4 +30,7 @@
 ![](.images/index.png)
 * 消息
 ![](.images/message.png)
+## 后续更新点
+* 增加收藏功能
+* 增强对话框功能
 
