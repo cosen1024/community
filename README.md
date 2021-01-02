@@ -33,4 +33,6 @@
 ## 后续更新点
 * 增加收藏功能
 * 增强对话框功能
+## 相关资源
+[相关的教程](https://pan.baidu.com/s/1LjYYwJVsqNBxq69udsXMvA):网盘提取码：wxdd 
 
