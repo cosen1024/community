@@ -39,3 +39,4 @@
 ## 相关资源
 [相关的教程](https://pan.baidu.com/s/1LjYYwJVsqNBxq69udsXMvA):网盘提取码：wxdd 
 
+有项目相关、求职等问题，可以加我微信交流，个人微信：kusengo，![微信二维码](http://blog-img.coolsen.cn/img/image-20230427195311976.png)
